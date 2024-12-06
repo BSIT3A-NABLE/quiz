@@ -301,6 +301,16 @@
           <p>Select your quiz preferences:</p>
         </div>
 
+        <div class="username-input">
+          <label for="username">Enter your username:</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter your username"
+            oninput="updateUsername()"
+          />
+        </div>
+
         <div class="options-container">
           <!-- Difficulty Box -->
           <div class="option-box">
@@ -332,7 +342,7 @@
             <button
               class="choice-button hidden"
               id="trueFalseBtn"
-              onclick="selectOption('type', 'truefalse')"
+              onclick="selectOption('type', 'boolean')"
             >
               True or False
             </button>
@@ -378,7 +388,9 @@
       <p>&copy; 2024 ArtQuest. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+      let username = "";
       let selectedDifficulty = "";
       let selectedType = "";
       let timerInterval;
@@ -386,80 +398,53 @@
       let currentQuestionIndex = 0;
       let score = 0;
 
-      const questions = [
-        {
-          question: "Who painted the Mona Lisa?",
-          options: [
-            "Leonardo da Vinci",
-            "Vincent van Gogh",
-            "Pablo Picasso",
-            "Claude Monet",
-          ],
-          correct: 0,
-        },
-        {
-          question: "What is the term for a painting of a fruit bowl?",
-          options: ["Still Life", "Abstract", "Portrait", "Landscape"],
-          correct: 0,
-        },
-        {
-          question: "Which artist is known for the painting 'Starry Night'?",
-          options: [
-            "Vincent van Gogh",
-            "Claude Monet",
-            "Pablo Picasso",
-            "Michelangelo",
-          ],
-          correct: 0,
-        },
-        {
-          question: "Who created the 'David' sculpture?",
-          options: [
-            "Michelangelo",
-            "Donatello",
-            "Leonardo da Vinci",
-            "Raphael",
-          ],
-          correct: 0,
-        },
-        {
-          question:
-            "Which period is known for the use of bright colors and abstract shapes?",
-          options: ["Cubism", "Impressionism", "Renaissance", "Surrealism"],
-          correct: 0,
-        },
-        {
-          question: "Who painted the 'Persistence of Memory'?",
-          options: ["Salvador Dalí", "Picasso", "Frida Kahlo", "Van Gogh"],
-          correct: 0,
-        },
-        {
-          question:
-            "What is the main color used in 'The Scream' by Edvard Munch?",
-          options: ["Red", "Blue", "Yellow", "Green"],
-          correct: 0,
-        },
-        {
-          question: "What was the art movement of Pablo Picasso?",
-          options: ["Cubism", "Impressionism", "Realism", "Surrealism"],
-          correct: 0,
-        },
-        {
-          question: "Who painted the 'Girl with a Pearl Earring'?",
-          options: [
-            "Johannes Vermeer",
-            "Leonardo da Vinci",
-            "Rembrandt",
-            "Michelangelo",
-          ],
-          correct: 0,
-        },
-        {
-          question: "Which artist is known for the 'Water Lilies' series?",
-          options: ["Claude Monet", "Edgar Degas", "Gustav Klimt", "Van Gogh"],
-          correct: 0,
-        },
-      ];
+      let questions = [];
+
+      function updateUsername() {
+        username = document.getElementById("username").value;
+      }
+
+      async function fetchQuestions() {
+        try {
+          const response = await axios.get("https://opentdb.com/api.php", {
+            params: {
+              amount: 2,
+              difficulty: selectedDifficulty,
+              type: selectedType,
+            },
+          });
+
+          // Transform the response into the desired format
+          const questions = response.data.results.map((question) => {
+            function shuffleArray(array) {
+              return array.sort(() => Math.random() - 0.5);
+            }
+
+            const options = shuffleArray([
+              ...question.incorrect_answers,
+              question.correct_answer,
+            ]);
+
+            // // Shuffle the options array
+            // shuffleArray(options);
+
+            const correctAnswerIndex = options.findIndex(
+              (option) => option === question.correct_answer
+            );
+
+            return {
+              question: question.question,
+              correct: correctAnswerIndex,
+              options: options,
+            };
+          });
+
+          return questions;
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          return [];
+        }
+      }
 
       // Shuffle the array of questions
       function shuffleArray(arr) {
@@ -468,9 +453,6 @@
           [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
         }
       }
-
-      // Shuffle the questions and the options within each question
-      shuffleArray(questions);
 
       questions.forEach((question, index) => {
         const originalCorrect = question.correct;
@@ -485,66 +467,6 @@
           console.log(`${i + 1}. ${option}`);
         });
       });
-      const trueFalseQuestions = [
-        {
-          question: "Pablo Picasso co-founded the Cubist art movement.",
-          options: ["True", "False"],
-          correct: 0, // True
-        },
-        {
-          question: "The Mona Lisa was painted by Vincent van Gogh.",
-          options: ["True", "False"],
-          correct: 1, // False
-        },
-        {
-          question:
-            "The Sistine Chapel ceiling was painted by Michelangelo, not Raphael.",
-          options: ["True", "False"],
-          correct: 0, // True
-        },
-        {
-          question:
-            "Impressionism is a style of painting that focuses on capturing light and its effects.",
-          options: ["True", "False"],
-          correct: 0, // True
-        },
-        {
-          question:
-            "The painting 'The Persistence of Memory' was created by Salvador Dalí in the 1940s.",
-          options: ["True", "False"],
-          correct: 1, // False (it was created in 1931)
-        },
-        {
-          question:
-            "The famous 'Water Lilies' series was painted by Claude Monet.",
-          options: ["True", "False"],
-          correct: 0, // True
-        },
-        {
-          question:
-            "The painting 'Guernica' was created by Pablo Picasso in response to the Spanish Civil War.",
-          options: ["True", "False"],
-          correct: 0, // True
-        },
-        {
-          question:
-            "The Art Nouveau movement primarily focused on geometric shapes and abstract designs.",
-          options: ["True", "False"],
-          correct: 1, // False (Art Nouveau is known for its organic forms and flowing lines)
-        },
-        {
-          question:
-            "Surrealism, which emerged in the 1920s, sought to challenge the boundaries of reality and dream imagery.",
-          options: ["True", "False"],
-          correct: 0, // True
-        },
-        {
-          question:
-            "Vincent van Gogh's 'Starry Night' was painted while he was in a mental asylum.",
-          options: ["True", "False"],
-          correct: 0, // True
-        },
-      ];
 
       // Shuffle the array of questions
       function shuffleArray(arr) {
@@ -596,10 +518,13 @@
         }
       }
 
-      function startQuiz() {
+      async function startQuiz() {
         document.getElementById("quiz-setup").classList.add("hidden");
         document.getElementById("quiz-area").classList.remove("hidden");
         startTimer();
+
+        questions = await fetchQuestions();
+
         showQuestion();
       }
 
@@ -677,6 +602,19 @@
             showQuestion();
           } else {
             clearInterval(timerInterval);
+
+            axios
+              .post("http://localhost:3000/quiz-result", {
+                username: username,
+                score: score || 0,
+              })
+              .then((response) => {
+                console.log("Quiz result saved:", response.data);
+              })
+              .catch((error) => {
+                console.error("Error submitting quiz result:", error);
+              });
+
             showResult();
           }
         }, 1000);

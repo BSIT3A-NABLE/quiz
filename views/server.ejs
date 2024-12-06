@@ -1,68 +1,64 @@
 <!-- views/server.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Art Trivia Questions</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .question-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            font-size: 18px;
-            color: #333;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        li {
-            padding: 8px;
-            background-color: #f4f4f4;
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        li:hover {
-            background-color: #ddd;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 30px;
+      }
+      .question-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        font-size: 18px;
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+      li {
+        padding: 8px;
+        background-color: #f4f4f4;
+        margin: 5px 0;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      li:hover {
+        background-color: #ddd;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>Art Trivia Questions</h1>
 
     <% questions.forEach(function(question, index) { %>
-        <div class="question-container">
-            <h2><%= index + 1 %>. <%= question.question %></h2>
-            <ul>
-                <%
-                    // Combine correct answer with incorrect answers and shuffle them
-                    const answers = [...question.incorrect_answers, question.correct_answer];
-                    answers.sort(() => Math.random() - 0.5); // Randomize the answers
-                %>
-                <% answers.forEach(function(answer) { %>
-                    <li><%= answer %></li>
-                <% }) %>
-            </ul>
-        </div>
+    <div class="question-container">
+      <h2><%= index + 1 %>. <%= question.question %></h2>
+      <ul>
+        <% // Combine correct answer with incorrect answers and shuffle them
+        const answers = [...question.incorrect_answers,
+        question.correct_answer]; answers.sort(() => Math.random() - 0.5); //
+        Randomize the answers %> <% answers.forEach(function(answer) { %>
+        <li><%= answer %></li>
+        <% }) %>
+      </ul>
+    </div>
     <% }) %>
-
-</body>
+  </body>
 </html>
