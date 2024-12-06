@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+
+    <!-- Embedding the CSS styles directly -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+            border-radius: 2px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Results Section */
+        .result-section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .result-section h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .result-table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 800px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .result-table th, .result-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .result-table th {
+            background-color: #2c3e50;
+            color: white;
+            font-size: 18px;
+        }
+
+        .result-table td {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .result-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Footer */
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>ArtQuest: Quiz Results</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/quiz" class="active">Quiz</a></li>
+                <li><a href="/history">History</a></li>
+                <li><a href="/aboutus">About us</a></li>
+                <li><a href="/Result">Result</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="result-section">
+        <h2>Quiz Results</h2>
+        <table class="result-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be dynamically generated based on database integration -->
+                <tr>
+                    <td>John Doe</td>
+                    <td>8/10</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>7/10</td>
+                </tr>
+                <tr>
+                    <td>Alex Johnson</td>
+                    <td>9/10</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+</body>
+</html>

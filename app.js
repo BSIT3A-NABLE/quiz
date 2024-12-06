@@ -28,7 +28,7 @@ var galleryRouter = require('./routes/gallery');
 var quizRouter = require('./routes/quiz'); // New route for quiz
 var historyRouter = require('./routes/history'); // New route for history
 var aboutusRouter = require('./routes/aboutus'); // New route for About Us
-
+var ResultRouter = require('./routes/Result');
 var app = express();
 
 // view engine setup
@@ -50,10 +50,12 @@ app.use('/gallery', galleryRouter);
 app.use('/quiz', quizRouter);  // This is your new route for the quiz
 app.use('/history', historyRouter);  // New route for the history page
 app.use('/aboutus', aboutusRouter);  // New route for About Us page
+app.use('/Result', ResultRouter);  
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+
 });
 
 // Error handler
