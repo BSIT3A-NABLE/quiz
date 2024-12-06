@@ -1,631 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Art Gallery Quiz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-        }
+      /* Global Styles */
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        color: #333;
+      }
 
-        /* Navigation Bar */
-        header {
-            background-color: #333;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+      /* Navigation Bar */
+      header {
+        background-color: #333;
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-        .logo h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: normal;
-        }
+      .logo h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: normal;
+      }
 
-        nav ul {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
+      nav ul {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 8px 12px;
-            transition: background-color 0.3s;
-            border-radius: 2px;
-        }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 8px 12px;
+        transition: background-color 0.3s;
+        border-radius: 2px;
+      }
 
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-        }
+      nav ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+      }
 
-/* Main Content */
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 0px; /* Optional, if you want some space at the top */
-    height: 100vh; /* Ensure it takes full viewport height */
-    width: 100%;
-}
+      /* Main Content */
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 0px; /* Optional, if you want some space at the top */
+        height: 100vh; /* Ensure it takes full viewport height */
+        width: 100%;
+      }
 
-        /* Quiz Setup */
-        .quiz-container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-        }
+      /* Quiz Setup */
+      .quiz-container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+      }
 
-        .quiz-title h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #333;
-        }
+      .quiz-title h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #333;
+      }
 
-        .quiz-title p {
-            font-size: 18px;
-            color: #666;
-        }
+      .quiz-title p {
+        font-size: 18px;
+        color: #666;
+      }
 
+      .options-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        gap: 20px;
+      }
+
+      .option-box {
+        background-color: #f9f9f9;
+        padding: 20px;
+        width: 45%;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .option-box h2 {
+        font-size: 20px;
+        color: #444;
+        margin-bottom: 20px;
+      }
+
+      .choice-button {
+        background-color: #3108ff;
+        color: white;
+        font-size: 18px;
+        padding: 15px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .choice-button:hover {
+        background-color: #e55d4b;
+        transform: scale(1.05);
+      }
+
+      .choice-button.selected-correct {
+        background-color: #4caf50; /* Green for Correct */
+      }
+
+      .choice-button.selected-incorrect {
+        background-color: #f44336; /* Red for Incorrect */
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #quiz-area {
+        background-color: white;
+        padding: 20px;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      #quiz-area h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      .timer {
+        font-size: 20px;
+        color: #ff6f61;
+        font-weight: bold;
+      }
+
+      .progress-bar {
+        width: 100%;
+        background-color: #e0e0e0;
+        height: 6px;
+        border-radius: 3px;
+        margin-top: 20px;
+      }
+
+      .progress-bar span {
+        width: 0%;
+        height: 100%;
+        background-color: #ff6f61;
+        border-radius: 3px;
+      }
+
+      .answer-feedback {
+        padding: 10px;
+        margin-top: 20px;
+        font-size: 18px;
+        color: white;
+        border-radius: 5px;
+      }
+
+      .correct {
+        background-color: #4caf50;
+      }
+
+      .incorrect {
+        background-color: #f44336;
+      }
+
+      .navigation-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .navigation-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.2s;
+      }
+
+      .navigation-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+
+      /* Result Styles */
+      .result-container {
+        background-color: white;
+        padding: 40px;
+        width: 100%;
+        max-width: 600px;
+        margin-top: 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .result-container h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .result-container p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      .result-buttons {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      footer {
+        background-color: #2b2d42;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+      }
+
+      footer p {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .options-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            gap: 20px;
+          flex-direction: column;
+          align-items: center;
         }
 
         .option-box {
-            background-color: #f9f9f9;
-            padding: 20px;
-            width: 45%;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          margin-bottom: 20px;
         }
-
-        .option-box h2 {
-            font-size: 20px;
-            color: #444;
-            margin-bottom: 20px;
-        }
-
-        .choice-button {
-            background-color: #3108ff;
-            color: white;
-            font-size: 18px;
-            padding: 15px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .choice-button:hover {
-            background-color: #e55d4b;
-            transform: scale(1.05);
-        }
-
-        .choice-button.selected-correct {
-            background-color: #4caf50; /* Green for Correct */
-        }
-
-        .choice-button.selected-incorrect {
-            background-color: #f44336; /* Red for Incorrect */
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        #quiz-area {
-            background-color: white;
-            padding: 20px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        #quiz-area h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .timer {
-            font-size: 20px;
-            color: #ff6f61;
-            font-weight: bold;
-        }
-
-        .progress-bar {
-            width: 100%;
-            background-color: #e0e0e0;
-            height: 6px;
-            border-radius: 3px;
-            margin-top: 20px;
-        }
-
-        .progress-bar span {
-            width: 0%;
-            height: 100%;
-            background-color: #ff6f61;
-            border-radius: 3px;
-        }
-
-        .answer-feedback {
-            padding: 10px;
-            margin-top: 20px;
-            font-size: 18px;
-            color: white;
-            border-radius: 5px;
-        }
-
-        .correct {
-            background-color: #4caf50;
-        }
-
-        .incorrect {
-            background-color: #f44336;
-        }
-
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .navigation-button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .navigation-button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        /* Result Styles */
-        .result-container {
-            background-color: white;
-            padding: 40px;
-            width: 100%;
-            max-width: 600px;
-            margin-top: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .result-container h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .result-container p {
-            font-size: 18px;
-            color: #666;
-        }
-
-        .result-buttons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        footer {
-    background-color: #2b2d42;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-}
-
-        footer p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .options-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .option-box {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="logo">
-            <h1>ArtQuest: Test Your Knowledge</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="Home">Home</a></li>
-                <li><a href="gallery">Gallery</a></li>
-                <li><a href="quiz" class="active">Quiz</a></li>
-                <li><a href="history">History</a></li>
-                <li><a href="aboutus">About Us</a></li>
-            </ul>
-        </nav>
+      <div class="logo">
+        <h1>ArtQuest: Test Your Knowledge</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="Home">Home</a></li>
+          <li><a href="gallery">Gallery</a></li>
+          <li><a href="quiz" class="active">Quiz</a></li>
+          <li><a href="history">History</a></li>
+          <li><a href="aboutus">About Us</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
-        <div class="quiz-container" id="quiz-setup">
-            <div class="quiz-title">
-                <h1>Art Quiz</h1>
-                <p>Select your quiz preferences:</p>
-            </div>
-
-            <div class="options-container">
-                <!-- Difficulty Box -->
-                <div class="option-box">
-                    <h2>Difficulty</h2>
-                    <button class="choice-button" onclick="selectOption('difficulty', 'easy')">Easy</button>
-                    <button class="choice-button" onclick="selectOption('difficulty', 'medium')">Medium</button>
-                </div>
-
-                <!-- Quiz Type Box -->
-                <div class="option-box">
-                    <h2>Quiz Type</h2>
-                    <button class="choice-button" id="multipleChoiceBtn" onclick="selectOption('type', 'multiple')">Multiple Choice</button>
-                    <button class="choice-button hidden" id="trueFalseBtn" onclick="selectOption('type', 'truefalse')">True or False</button>
-                </div>
-            </div>
-
-            <button class="choice-button hidden" id="startButton" onclick="startQuiz()">Start Quiz</button>
+      <div class="quiz-container" id="quiz-setup">
+        <div class="quiz-title">
+          <h1>Art Quiz ni Ram</h1>
+          <p>Select your quiz preferences:</p>
         </div>
 
-        <!-- Quiz Area -->
-        <div id="quiz-area" class="hidden">
-            <h2 id="questionText">Loading Question...</h2>
-            <div id="choices"></div>
-            <p class="timer" id="timer">Time: 00:00</p>
-            <div class="progress-bar">
-                <span id="progress"></span>
-            </div>
+        <div class="options-container">
+          <!-- Difficulty Box -->
+          <div class="option-box">
+            <h2>Difficulty</h2>
+            <button
+              class="choice-button"
+              onclick="selectOption('difficulty', 'easy')"
+            >
+              Easy
+            </button>
+            <button
+              class="choice-button"
+              onclick="selectOption('difficulty', 'medium')"
+            >
+              Medium
+            </button>
+          </div>
+
+          <!-- Quiz Type Box -->
+          <div class="option-box">
+            <h2>Quiz Type</h2>
+            <button
+              class="choice-button"
+              id="multipleChoiceBtn"
+              onclick="selectOption('type', 'multiple')"
+            >
+              Multiple Choice
+            </button>
+            <button
+              class="choice-button hidden"
+              id="trueFalseBtn"
+              onclick="selectOption('type', 'truefalse')"
+            >
+              True or False
+            </button>
+          </div>
         </div>
 
-        <!-- Result Area -->
-        <div id="result" class="hidden">
-            <div class="result-container">
-                <h2>Quiz Completed</h2>
-                <p>Your score: <span id="score">0</span> / 10</p>
-                <div class="result-buttons">
-<!-- Restart Button with href -->
-<a href="http://localhost:3000/quiz">
-    <button class="navigation-button">Restart</button>
-</a>
-                    <button class="navigation-button" onclick="exitQuiz()">Exit</button>
-                </div>
-            </div>
+        <button
+          class="choice-button hidden"
+          id="startButton"
+          onclick="startQuiz()"
+        >
+          Start Quiz
+        </button>
+      </div>
+
+      <!-- Quiz Area -->
+      <div id="quiz-area" class="hidden">
+        <h2 id="questionText">Loading Question...</h2>
+        <div id="choices"></div>
+        <p class="timer" id="timer">Time: 00:00</p>
+        <div class="progress-bar">
+          <span id="progress"></span>
         </div>
+      </div>
+
+      <!-- Result Area -->
+      <div id="result" class="hidden">
+        <div class="result-container">
+          <h2>Quiz Completed</h2>
+          <p>Your score: <span id="score">0</span> / 10</p>
+          <div class="result-buttons">
+            <!-- Restart Button with href -->
+            <a href="http://localhost:3000/quiz">
+              <button class="navigation-button">Restart</button>
+            </a>
+            <button class="navigation-button" onclick="exitQuiz()">Exit</button>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 ArtQuest. All rights reserved.</p>
+      <p>&copy; 2024 ArtQuest. All rights reserved.</p>
     </footer>
 
     <script>
-        let selectedDifficulty = '';
-        let selectedType = '';
-        let timerInterval;
-        let timeRemaining = 60;  // seconds
-        let currentQuestionIndex = 0;
-        let score = 0;
+      let selectedDifficulty = "";
+      let selectedType = "";
+      let timerInterval;
+      let timeRemaining = 60; // seconds
+      let currentQuestionIndex = 0;
+      let score = 0;
 
-        const questions = [
-    {
-        question: "Who painted the Mona Lisa?",
-        options: ["Leonardo da Vinci", "Vincent van Gogh", "Pablo Picasso", "Claude Monet"],
-        correct: 0
-    },
-    {
-        question: "What is the term for a painting of a fruit bowl?",
-        options: ["Still Life", "Abstract", "Portrait", "Landscape"],
-        correct: 0
-    },
-    {
-        question: "Which artist is known for the painting 'Starry Night'?",
-        options: ["Vincent van Gogh", "Claude Monet", "Pablo Picasso", "Michelangelo"],
-        correct: 0
-    },
-    {
-        question: "Who created the 'David' sculpture?",
-        options: ["Michelangelo", "Donatello", "Leonardo da Vinci", "Raphael"],
-        correct: 0
-    },
-    {
-        question: "Which period is known for the use of bright colors and abstract shapes?",
-        options: ["Cubism", "Impressionism", "Renaissance", "Surrealism"],
-        correct: 0
-    },
-    {
-        question: "Who painted the 'Persistence of Memory'?",
-        options: ["Salvador Dalí", "Picasso", "Frida Kahlo", "Van Gogh"],
-        correct: 0
-    },
-    {
-        question: "What is the main color used in 'The Scream' by Edvard Munch?",
-        options: ["Red", "Blue", "Yellow", "Green"],
-        correct: 0
-    },
-    {
-        question: "What was the art movement of Pablo Picasso?",
-        options: ["Cubism", "Impressionism", "Realism", "Surrealism"],
-        correct: 0
-    },
-    {
-        question: "Who painted the 'Girl with a Pearl Earring'?",
-        options: ["Johannes Vermeer", "Leonardo da Vinci", "Rembrandt", "Michelangelo"],
-        correct: 0
-    },
-    {
-        question: "Which artist is known for the 'Water Lilies' series?",
-        options: ["Claude Monet", "Edgar Degas", "Gustav Klimt", "Van Gogh"],
-        correct: 0
-    }
-];
+      const questions = [
+        {
+          question: "Who painted the Mona Lisa?",
+          options: [
+            "Leonardo da Vinci",
+            "Vincent van Gogh",
+            "Pablo Picasso",
+            "Claude Monet",
+          ],
+          correct: 0,
+        },
+        {
+          question: "What is the term for a painting of a fruit bowl?",
+          options: ["Still Life", "Abstract", "Portrait", "Landscape"],
+          correct: 0,
+        },
+        {
+          question: "Which artist is known for the painting 'Starry Night'?",
+          options: [
+            "Vincent van Gogh",
+            "Claude Monet",
+            "Pablo Picasso",
+            "Michelangelo",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Who created the 'David' sculpture?",
+          options: [
+            "Michelangelo",
+            "Donatello",
+            "Leonardo da Vinci",
+            "Raphael",
+          ],
+          correct: 0,
+        },
+        {
+          question:
+            "Which period is known for the use of bright colors and abstract shapes?",
+          options: ["Cubism", "Impressionism", "Renaissance", "Surrealism"],
+          correct: 0,
+        },
+        {
+          question: "Who painted the 'Persistence of Memory'?",
+          options: ["Salvador Dalí", "Picasso", "Frida Kahlo", "Van Gogh"],
+          correct: 0,
+        },
+        {
+          question:
+            "What is the main color used in 'The Scream' by Edvard Munch?",
+          options: ["Red", "Blue", "Yellow", "Green"],
+          correct: 0,
+        },
+        {
+          question: "What was the art movement of Pablo Picasso?",
+          options: ["Cubism", "Impressionism", "Realism", "Surrealism"],
+          correct: 0,
+        },
+        {
+          question: "Who painted the 'Girl with a Pearl Earring'?",
+          options: [
+            "Johannes Vermeer",
+            "Leonardo da Vinci",
+            "Rembrandt",
+            "Michelangelo",
+          ],
+          correct: 0,
+        },
+        {
+          question: "Which artist is known for the 'Water Lilies' series?",
+          options: ["Claude Monet", "Edgar Degas", "Gustav Klimt", "Van Gogh"],
+          correct: 0,
+        },
+      ];
 
-// Shuffle the array of questions
-function shuffleArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
-    }
-}
+      // Shuffle the array of questions
+      function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
+        }
+      }
 
-// Shuffle the questions and the options within each question
-shuffleArray(questions);
+      // Shuffle the questions and the options within each question
+      shuffleArray(questions);
 
-questions.forEach((question, index) => {
-    const originalCorrect = question.correct;
-    shuffleArray(question.options);
-    question.correct = question.options.indexOf(question.options[originalCorrect]);
+      questions.forEach((question, index) => {
+        const originalCorrect = question.correct;
+        shuffleArray(question.options);
+        question.correct = question.options.indexOf(
+          question.options[originalCorrect]
+        );
 
-    // Display question number and question text
-    console.log(`Question ${index + 1}: ${question.question}`);
-    question.options.forEach((option, i) => {
-        console.log(`${i + 1}. ${option}`);
-    });
-});
-const trueFalseQuestions = [
-    {
-        question: "Pablo Picasso co-founded the Cubist art movement.",
-        options: ["True", "False"],
-        correct: 0 // True
-    },
-    {
-        question: "The Mona Lisa was painted by Vincent van Gogh.",
-        options: ["True", "False"],
-        correct: 1 // False
-    },
-    {
-        question: "The Sistine Chapel ceiling was painted by Michelangelo, not Raphael.",
-        options: ["True", "False"],
-        correct: 0 // True
-    },
-    {
-        question: "Impressionism is a style of painting that focuses on capturing light and its effects.",
-        options: ["True", "False"],
-        correct: 0 // True
-    },
-    {
-        question: "The painting 'The Persistence of Memory' was created by Salvador Dalí in the 1940s.",
-        options: ["True", "False"],
-        correct: 1 // False (it was created in 1931)
-    },
-    {
-        question: "The famous 'Water Lilies' series was painted by Claude Monet.",
-        options: ["True", "False"],
-        correct: 0 // True
-    },
-    {
-        question: "The painting 'Guernica' was created by Pablo Picasso in response to the Spanish Civil War.",
-        options: ["True", "False"],
-        correct: 0 // True
-    },
-    {
-        question: "The Art Nouveau movement primarily focused on geometric shapes and abstract designs.",
-        options: ["True", "False"],
-        correct: 1 // False (Art Nouveau is known for its organic forms and flowing lines)
-    },
-    {
-        question: "Surrealism, which emerged in the 1920s, sought to challenge the boundaries of reality and dream imagery.",
-        options: ["True", "False"],
-        correct: 0 // True
-    },
-    {
-        question: "Vincent van Gogh's 'Starry Night' was painted while he was in a mental asylum.",
-        options: ["True", "False"],
-        correct: 0 // True
-    }
-];
+        // Display question number and question text
+        console.log(`Question ${index + 1}: ${question.question}`);
+        question.options.forEach((option, i) => {
+          console.log(`${i + 1}. ${option}`);
+        });
+      });
+      const trueFalseQuestions = [
+        {
+          question: "Pablo Picasso co-founded the Cubist art movement.",
+          options: ["True", "False"],
+          correct: 0, // True
+        },
+        {
+          question: "The Mona Lisa was painted by Vincent van Gogh.",
+          options: ["True", "False"],
+          correct: 1, // False
+        },
+        {
+          question:
+            "The Sistine Chapel ceiling was painted by Michelangelo, not Raphael.",
+          options: ["True", "False"],
+          correct: 0, // True
+        },
+        {
+          question:
+            "Impressionism is a style of painting that focuses on capturing light and its effects.",
+          options: ["True", "False"],
+          correct: 0, // True
+        },
+        {
+          question:
+            "The painting 'The Persistence of Memory' was created by Salvador Dalí in the 1940s.",
+          options: ["True", "False"],
+          correct: 1, // False (it was created in 1931)
+        },
+        {
+          question:
+            "The famous 'Water Lilies' series was painted by Claude Monet.",
+          options: ["True", "False"],
+          correct: 0, // True
+        },
+        {
+          question:
+            "The painting 'Guernica' was created by Pablo Picasso in response to the Spanish Civil War.",
+          options: ["True", "False"],
+          correct: 0, // True
+        },
+        {
+          question:
+            "The Art Nouveau movement primarily focused on geometric shapes and abstract designs.",
+          options: ["True", "False"],
+          correct: 1, // False (Art Nouveau is known for its organic forms and flowing lines)
+        },
+        {
+          question:
+            "Surrealism, which emerged in the 1920s, sought to challenge the boundaries of reality and dream imagery.",
+          options: ["True", "False"],
+          correct: 0, // True
+        },
+        {
+          question:
+            "Vincent van Gogh's 'Starry Night' was painted while he was in a mental asylum.",
+          options: ["True", "False"],
+          correct: 0, // True
+        },
+      ];
 
-// Shuffle the array of questions
-function shuffleArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
-    }
-}
+      // Shuffle the array of questions
+      function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
+        }
+      }
 
-// Shuffle the true/false questions and display them
-shuffleArray(trueFalseQuestions);
+      // Shuffle the true/false questions and display them
+      shuffleArray(trueFalseQuestions);
 
-trueFalseQuestions.forEach((question, index) => {
-    const originalCorrect = question.correct;
-    shuffleArray(question.options);
-    question.correct = question.options.indexOf(question.options[originalCorrect]);
+      trueFalseQuestions.forEach((question, index) => {
+        const originalCorrect = question.correct;
+        shuffleArray(question.options);
+        question.correct = question.options.indexOf(
+          question.options[originalCorrect]
+        );
 
-    // Display question number and question text
-    console.log(`Question ${index + 1}: ${question.question}`);
-    question.options.forEach((option, i) => {
-        console.log(`${i + 1}. ${option}`);
-    });
-});
+        // Display question number and question text
+        console.log(`Question ${index + 1}: ${question.question}`);
+        question.options.forEach((option, i) => {
+          console.log(`${i + 1}. ${option}`);
+        });
+      });
 
-        function selectOption(category, value) {
-            if (category === 'difficulty') {
-                selectedDifficulty = value;
-                if (value === 'medium') {
-                    // Switch to True or False type when 'Medium' is selected
-                    document.getElementById('trueFalseBtn').classList.remove('hidden');
-                    document.getElementById('multipleChoiceBtn').classList.add('hidden');
-                } else {
-                    document.getElementById('trueFalseBtn').classList.add('hidden');
-                    document.getElementById('multipleChoiceBtn').classList.remove('hidden');
-                }
-            } else if (category === 'type') {
-                selectedType = value;
-            }
-
-            // Show the start button if both options are selected
-            if (selectedDifficulty && selectedType) {
-                document.getElementById('startButton').classList.remove('hidden');
-            }
+      function selectOption(category, value) {
+        if (category === "difficulty") {
+          selectedDifficulty = value;
+          if (value === "medium") {
+            // Switch to True or False type when 'Medium' is selected
+            document.getElementById("trueFalseBtn").classList.remove("hidden");
+            document
+              .getElementById("multipleChoiceBtn")
+              .classList.add("hidden");
+          } else {
+            document.getElementById("trueFalseBtn").classList.add("hidden");
+            document
+              .getElementById("multipleChoiceBtn")
+              .classList.remove("hidden");
+          }
+        } else if (category === "type") {
+          selectedType = value;
         }
 
-        function startQuiz() {
-            document.getElementById('quiz-setup').classList.add('hidden');
-            document.getElementById('quiz-area').classList.remove('hidden');
-            startTimer();
+        // Show the start button if both options are selected
+        if (selectedDifficulty && selectedType) {
+          document.getElementById("startButton").classList.remove("hidden");
+        }
+      }
+
+      function startQuiz() {
+        document.getElementById("quiz-setup").classList.add("hidden");
+        document.getElementById("quiz-area").classList.remove("hidden");
+        startTimer();
+        showQuestion();
+      }
+
+      function startTimer() {
+        timerInterval = setInterval(function () {
+          timeRemaining--;
+          document.getElementById("timer").textContent = `Time: 00:${
+            timeRemaining < 10 ? "0" + timeRemaining : timeRemaining
+          }`;
+          if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            showResult();
+          }
+        }, 1000);
+      }
+
+      function showQuestion() {
+        const question = questions[currentQuestionIndex];
+        document.getElementById("questionText").textContent = question.question;
+        const choicesContainer = document.getElementById("choices");
+        choicesContainer.innerHTML = ""; // Clear previous choices
+
+        if (selectedType === "multiple") {
+          question.options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.classList.add("choice-button");
+            button.textContent = option;
+            button.onclick = function () {
+              checkAnswer(index);
+            };
+            choicesContainer.appendChild(button);
+          });
+        } else {
+          // True or False options
+          const trueButton = document.createElement("button");
+          trueButton.classList.add("choice-button");
+          trueButton.textContent = "True";
+          trueButton.onclick = function () {
+            checkAnswer(1); // assuming the correct answer is True
+          };
+          choicesContainer.appendChild(trueButton);
+
+          const falseButton = document.createElement("button");
+          falseButton.classList.add("choice-button");
+          falseButton.textContent = "False";
+          falseButton.onclick = function () {
+            checkAnswer(0); // assuming the correct answer is False
+          };
+          choicesContainer.appendChild(falseButton);
+        }
+      }
+
+      function checkAnswer(selectedIndex) {
+        const question = questions[currentQuestionIndex];
+        const buttons = document.querySelectorAll(".choice-button");
+
+        // Mark the selected option
+        buttons[selectedIndex].classList.add(
+          selectedIndex === question.correct
+            ? "selected-correct"
+            : "selected-incorrect"
+        );
+
+        if (selectedIndex === question.correct) {
+          score++;
+        }
+
+        // Disable buttons after selection
+        buttons.forEach((button) => (button.disabled = true));
+
+        // Show feedback and move to the next question
+        setTimeout(() => {
+          currentQuestionIndex++;
+          if (currentQuestionIndex < questions.length) {
             showQuestion();
-        }
+          } else {
+            clearInterval(timerInterval);
+            showResult();
+          }
+        }, 1000);
+      }
 
-        function startTimer() {
-            timerInterval = setInterval(function() {
-                timeRemaining--;
-                document.getElementById('timer').textContent = `Time: 00:${timeRemaining < 10 ? '0' + timeRemaining : timeRemaining}`;
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    showResult();
-                }
-            }, 1000);
-        }
+      function showResult() {
+        document.getElementById("quiz-area").classList.add("hidden");
+        document.getElementById("result").classList.remove("hidden");
+        document.getElementById("score").textContent = score;
+      }
 
-        function showQuestion() {
-            const question = questions[currentQuestionIndex];
-            document.getElementById('questionText').textContent = question.question;
-            const choicesContainer = document.getElementById('choices');
-            choicesContainer.innerHTML = '';  // Clear previous choices
+      function restartQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        timeRemaining = 60;
+        document.getElementById("result").classList.add("hidden");
+        document.getElementById("quiz-setup").classList.remove("hidden");
+      }
 
-            if (selectedType === 'multiple') {
-                question.options.forEach((option, index) => {
-                    const button = document.createElement('button');
-                    button.classList.add('choice-button');
-                    button.textContent = option;
-                    button.onclick = function() {
-                        checkAnswer(index);
-                    };
-                    choicesContainer.appendChild(button);
-                });
-            } else {
-                // True or False options
-                const trueButton = document.createElement('button');
-                trueButton.classList.add('choice-button');
-                trueButton.textContent = 'True';
-                trueButton.onclick = function() {
-                    checkAnswer(1); // assuming the correct answer is True
-                };
-                choicesContainer.appendChild(trueButton);
-
-                const falseButton = document.createElement('button');
-                falseButton.classList.add('choice-button');
-                falseButton.textContent = 'False';
-                falseButton.onclick = function() {
-                    checkAnswer(0); // assuming the correct answer is False
-                };
-                choicesContainer.appendChild(falseButton);
-            }
-        }
-
-        function checkAnswer(selectedIndex) {
-            const question = questions[currentQuestionIndex];
-            const buttons = document.querySelectorAll('.choice-button');
-
-            // Mark the selected option
-            buttons[selectedIndex].classList.add(
-                selectedIndex === question.correct ? 'selected-correct' : 'selected-incorrect'
-            );
-
-            if (selectedIndex === question.correct) {
-                score++;
-            }
-
-            // Disable buttons after selection
-            buttons.forEach(button => button.disabled = true);
-
-            // Show feedback and move to the next question
-            setTimeout(() => {
-                currentQuestionIndex++;
-                if (currentQuestionIndex < questions.length) {
-                    showQuestion();
-                } else {
-                    clearInterval(timerInterval);
-                    showResult();
-                }
-            }, 1000);
-        }
-
-        function showResult() {
-            document.getElementById('quiz-area').classList.add('hidden');
-            document.getElementById('result').classList.remove('hidden');
-            document.getElementById('score').textContent = score;
-        }
-
-        function restartQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            timeRemaining = 60;
-            document.getElementById('result').classList.add('hidden');
-            document.getElementById('quiz-setup').classList.remove('hidden');
-        }
-
-        function exitQuiz() {
-            window.location.href = 'Home';
-        }
+      function exitQuiz() {
+        window.location.href = "Home";
+      }
     </script>
-</body>
+  </body>
 </html>
