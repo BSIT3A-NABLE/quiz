@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            background-image: url('background.gif'); /* Add your GIF background file here */
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* About Us Section */
+        .about-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for readability */
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Team Member Container Styles */
+        .team-member {
+            width: 25%;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6); /* Subtle gradient for a cool effect */
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            perspective: 1000px;
+            animation: fadeInUp 1s ease-in-out forwards;
+            transform-style: preserve-3d; /* Adds a 3D depth */
+        }
+
+        .team-member:hover {
+            transform: scale(1.05) translateZ(10px); /* Enlarges and adds depth on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2); /* Deepened shadow on hover */
+        }
+
+        /* Enhanced Team Member Image */
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #333; /* Adds a border for a polished look */
+        }
+
+        /* Team Member Heading */
+        .team-member h3 {
+            margin: 10px 0 5px;
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Role and Description */
+        .team-member p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Bio */
+        .bio {
+            display: none;
+            font-size: 16px;
+            color: #555;
+            text-align: justify;
+            margin-top: 10px;
+            padding: 10px;
+            border-top: 1px solid #ddd; /* Separates bio with a subtle border */
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly translucent background */
+        }
+
+        /* Simple Fade In Effect for Team Section */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Simple Fade In Up Effect for Team Members */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Area -->
+    <header>
+        <div class="logo">
+            <h1>ArtQuest: How Well Do You Know Art?</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home">Home</a></li>
+                <li><a href="gallery">Gallery</a></li>
+                <li><a href="quiz">Quiz</a></li>
+                <li><a href="history">History</a></li>
+                <li><a href="aboutus" class="active">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Us Content -->
+    <section class="about-section">
+        <h2>Meet the Team</h2>
+        <div class="team-container">
+            <!-- Team Member 1 -->
+            <div class="team-member" onclick="toggleBio(0)">
+                <img src="images/ram.png" alt="Ramshalem Nable">
+                <h3>Ramshalem Nable</h3>
+                <p>BSIT - 3A</p>
+                <div class="bio" id="bio0">
+                    <p>Ramshalem, age 20, has a passion for crafting intuitive user experiences. She specializes in HTML, CSS, and JavaScript, bringing vibrant design skills to ArtQuest.</p>
+                    <p>Nationality: Filipino</p>
+                    <p>Address: City of Malabon, Philippines</p>
+                    <p>University: City of Malabon University</p>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-member" onclick="toggleBio(1)">
+                <img src="images/joce.png" alt="Jocelyn Cabrito">
+                <h3>Jocelyn Cabrito</h3>
+                <p>BSIT - 3A</p>
+                <div class="bio" id="bio1">
+                    <p>Jocelyn, age 21, is our back-end wizard managing databases and servers for a seamless experience. She’s skilled in PHP and MySQL, helping bring ArtQuest to life.</p>
+                    <p>Nationality: Filipino</p>
+                    <p>Address: City of Malabon, Philippines</p>
+                    <p>University: City of Malabon University</p>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-member" onclick="toggleBio(2)">
+                <img src="images/laysha.png" alt="Elisha Faith Balaston">
+                <h3>Elisha Faith Balaston</h3>
+                <p>BSIT - 3A</p>
+                <div class="bio" id="bio2">
+                    <p>Elisha, age 22, combines her skills in both front-end and back-end development to support the entire team. She’s proficient in JavaScript, Node.js, and Python.</p>
+                    <p>Nationality: Filipino</p>
+                    <p>Address: City of Malabon, Philippines</p>
+                    <p>University: City of Malabon University</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // JavaScript to toggle bio visibility
+        function toggleBio(memberIndex) {
+            var bioElement = document.getElementById('bio' + memberIndex);
+            if (bioElement.style.display === "none" || bioElement.style.display === "") {
+                bioElement.style.display = "block";
+            } else {
+                bioElement.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

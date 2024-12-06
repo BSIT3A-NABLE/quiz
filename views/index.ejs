@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Art Trivia Quiz</title>
+  <style>
+    /* Add your custom styling here */
+    .question-card {
+      border-radius: 10px;
+      border: 2px solid #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .answer-btn {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4 text-center">Art Trivia Quiz</h1>
+    
+    <form id="quiz-form">
+      <div class="mb-3">
+        <label for="amount" class="form-label">Number of Questions:</label>
+        <input type="number" class="form-control" id="amount" name="amount" min="1" max="50" value="10" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="difficulty" class="form-label">Select Difficulty:</label>
+        <select class="form-select" id="difficulty" name="difficulty" required>
+          <option value="easy" selected>Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="quizType" class="form-label">Select Quiz Type:</label>
+        <select class="form-select" id="quizType" name="quizType" required>
+          <option value="multiple" selected>Multiple Choice</option>
+          <option value="boolean">True or False</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Get Art Questions</button>
+    </form>
+
+    <div id="questions-container" class="mt-4"></div>
+
+    <div id="quiz-result" class="mt-4" style="display:none;">
+      <h2>Quiz Complete!</h2>
+      <p>Your Score: <span id="score">0</span> / <span id="total-questions">0</span></p>
+      <button id="restart-btn" class="btn btn-primary w-100">Retry Quiz</button>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#quiz-form').on('submit', function(event) {
+        event.preventDefault();
+        
+        var formData = $(this).serialize();  // Serialize form data
+
+        // Send AJAX request to fetch questions
+        $.ajax({
+          url: '/fetch_questions',  // The endpoint to fetch questions
+          type: 'POST',
+          data: formData,
+          success: function(response) {
+            displayQuestions(response.questions);
+            $('#quiz-form').hide();  // Hide the form once questions are loaded
+            $('#quiz-result').hide();  // Hide the result section
+          },
+          error: function(xhr, status, error) {
+            alert('Error fetching trivia questions. Please try again.');
+            console.error('Error: ', error);
+          }
+        });
+      });
+
+      // Function to display questions in the frontend
+      function displayQuestions(questions) {
+        var questionsHtml = '';
+        questions.forEach(function(question, index) {
+          var allAnswers = [...question.incorrect_answers, question.correct_answer];
+          allAnswers.sort(() => Math.random() - 0.5);  // Shuffle answers
+
+          questionsHtml += `
+            <div class="question-card">
+              <h3>Question ${index + 1}: ${question.question}</h3>
+              <ul class="list-group mt-3">
+                ${allAnswers.map(answer => `
+                  <li class="list-group-item">
+                    <button class="btn btn-outline-dark w-100 answer-btn" data-answer="${answer}">
+                      ${answer}
+                    </button>
+                  </li>`).join('')}
+              </ul>
+            </div>
+          `;
+        });
+
+        $('#questions-container').html(questionsHtml);  // Append questions to the container
+      }
+
+      // Restart the quiz
+      $('#restart-btn').on('click', function() {
+        $('#quiz-form').show();  // Show the quiz form again
+        $('#quiz-result').hide();  // Hide the result section
+        $('#questions-container').html('');  // Clear questions
+      });
+    });
+  </script>
+</body>
+</html>

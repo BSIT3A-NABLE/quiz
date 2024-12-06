@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtQuest: Explore Art</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            text-align: center;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .cta-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Featured Art Section */
+        .featured-art {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .featured-art h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .art-gallery {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .art-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 30%;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .art-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .art-item h3 {
+            margin: 15px 0 5px;
+            font-size: 22px;
+        }
+
+        .art-item p {
+            margin: 0 0 15px;
+            font-size: 18px;
+            color: #777;
+        }
+
+        .art-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Description Styles */
+        .description {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #444;
+            line-height: 1.5;
+            padding: 0 15px;
+            text-align: justify;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>ArtQuest: How Well Do You Know Art?</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home">Home</a></li>
+                <li><a href="gallery">Gallery</a></li>
+                <li><a href="quiz" class="active">Quiz</a></li>
+                <li><a href="history">History</a></li>
+                <li><a href="aboutus">About us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Discover the Beauty of Art</h2>
+            <p>Explore a vast collection of stunning artwork from renowned artists worldwide.</p> <br> <br> <br> <br> <br> 
+            <a href="#gallery" class="cta-button">Explore the Gallery</a>
+        </div>
+    </section>
+
+    <!-- Enhanced Gallery Section -->
+    <section class="featured-art" id="gallery">
+        <br> <br> <br> 
+        <h2>ArtQuest Gallery</h2>
+        <p>Browse through some of the finest pieces of art from various artists. Click on any piece to learn more about it!</p>
+        <div class="art-gallery">
+            <div class="art-item" onclick="toggleDescription(this)">
+                <img src="images/one.png" alt="Artwork 1">
+                <h3>The Starry Night</h3>
+                <p>Vincent van Gogh</p>
+                <div class="description" style="display: none;">
+                    <p>A masterpiece painted in 1889, depicting a swirling night sky filled with stars above a quiet village. This iconic work reflects van Gogh's emotional turmoil and innovative use of color and brushwork.</p>
+                </div>
+            </div>
+            <div class="art-item" onclick="toggleDescription(this)">
+                <img src="images/two.png" alt="Artwork 2">
+                <h3>The Persistence of Memory</h3>
+                <p>Salvador Dalí</p>
+                <div class="description" style="display: none;">
+                    <p>Created in 1931, this surreal painting features melting clocks draped over a desolate landscape. It explores themes of time, dreams, and the unconscious mind, becoming a hallmark of surrealism.</p>
+                </div>
+            </div>
+            <div class="art-item" onclick="toggleDescription(this)">
+                <img src="images/three.png" alt="Artwork 3">
+                <h3>Girl with a Pearl Earring</h3>
+                <p>Johannes Vermeer</p>
+                <div class="description" style="display: none;">
+                    <p>Painted around 1665, this artwork is often referred to as the 'Mona Lisa of the North.' It features a girl in a dark background, turning to gaze at the viewer, adorned with an exotic turban and a large pearl earring.</p>
+                </div>
+            </div>
+            <div class="art-item" onclick="toggleDescription(this)">
+                <img src="images/four.png" alt="Artwork 4">
+                <h3>The Scream</h3>
+                <p>Edvard Munch</p>
+                <div class="description" style="display: none;">
+                    <p>This iconic 1893 painting captures an agonized figure against a turbulent sky, symbolizing existential dread. It is considered a major work of expressionism, reflecting Munch's personal anxieties and emotions.</p>
+                </div>
+            </div>
+            <div class="art-item" onclick="toggleDescription(this)">
+                <img src="images/five.png" alt="Artwork 5">
+                <h3>Mona Lisa</h3>
+                <p>Leonardo da Vinci</p>
+                <div class="description" style="display: none;">
+                    <p>Created between 1503 and 1506, this portrait of a woman with a serene expression has become one of the most famous artworks in history. Its mysterious background and the subject's ambiguous smile have captivated viewers for centuries.</p>
+                </div>
+            </div>
+            <div class="art-item" onclick="toggleDescription(this)">
+                <img src="images/six.png" alt="Artwork 6">
+                <h3>The Kiss</h3>
+                <p>Gustav Klimt</p>
+                <div class="description" style="display: none;">
+                    <p>This 1907-1908 work features a couple embracing, enveloped in elaborate robes adorned with gold leaf. Klimt's use of color and pattern symbolizes intimacy and passion, making it a defining piece of the Art Nouveau movement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Art Gallery. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleDescription(element) {
+            const description = element.querySelector('.description');
+            description.style.display = description.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

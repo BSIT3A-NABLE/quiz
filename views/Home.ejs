@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery</title>
+    
+    <!-- Embedding the CSS styles directly -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+            border-radius: 2px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('images/Starry.gif'); /* Use your GIF file name here */
+            background-size: cover;
+            background-position: center;
+            height: 740px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            animation: fade-in 10s ease-in-out;
+        }
+
+        .hero-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            padding: 20px 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-container h2 {
+            color: #2c3e50;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero-container p {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background-color: #ff4c4c;
+        }
+
+        /* Featured Art Section */
+        .featured-art {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .featured-art h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .art-gallery {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .art-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 30%;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .art-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .art-item h3 {
+            margin: 15px 0 5px;
+            font-size: 22px;
+        }
+
+        .art-item p {
+            margin: 0 0 15px;
+            font-size: 18px;
+            color: #777;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>ArtQuest: How Well Do You Know Art?</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/quiz" class="active">Quiz</a></li>
+                <li><a href="/history">History</a></li>
+                <li><a href="/aboutus">About us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+   <section class="hero">
+        <div class="hero-content">
+            <div class="hero-container">
+                <h2>Discover the Beauty of Art</h2>
+                <p>Explore a vast collection of stunning artwork from renowned artists worldwide.</p>
+                <a href="/gallery" class="cta-button">Visit the Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-art">
+        <h2>Featured Artwork</h2>
+        <div class="art-gallery">
+            <div class="art-item">
+                <img src="images/Art1.png" alt="Artwork 1">
+                <h3>Sunlit Garden</h3>
+                <p>By Rosa Livingston</p>
+            </div>
+            <div class="art-item">
+                <img src="images/Art2.png" alt="Artwork 2">
+                <h3>Moonlit Forest</h3>
+                <p>By Leo Hayward</p>
+            </div>
+            <div class="art-item">
+                <img src="images/Art3.png" alt="Artwork 3">
+                <h3>Golden Shoreline</h3>
+                <p>By Emilia Torres</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Art Gallery. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtQuest: History of Art</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            background-image: url('images/evolution.png');
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .timeline h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .periods {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .period {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .period:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Description Section */
+        .description {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>ArtQuest: How Well Do You Know Art?</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home">Home</a></li>
+                <li><a href="gallery">Gallery</a></li>
+                <li><a href="quiz">Quiz</a></li>
+                <li><a href="history" class="active">History</a></li>
+                <li><a href="aboutus">About us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>The Evolution of Art</h2>
+            <p>Discover the rich history of art and how it has shaped our culture.</p>
+        </div>
+    </section>
+
+    <section class="timeline" id="timeline">
+        <h2>Art History Timeline</h2>
+        <div class="periods">
+            <div class="period" onclick="showDetails('prehistoric')">
+                <h3>Prehistoric Art</h3>
+            </div>
+            <div class="period" onclick="showDetails('ancient')">
+                <h3>Ancient Art</h3>
+            </div>
+            <div class="period" onclick="showDetails('medieval')">
+                <h3>Medieval Art</h3>
+            </div>
+            <div class="period" onclick="showDetails('renaissance')">
+                <h3>Renaissance Art</h3>
+            </div>
+            <div class="period" onclick="showDetails('modern')">
+                <h3>Modern Art</h3>
+            </div>
+        </div>
+
+        <div class="description" id="description">
+            <p>Select a period to see its details.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Art Gallery. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showDetails(period) {
+            let description = document.getElementById('description');
+            switch (period) {
+                case 'prehistoric':
+                    description.innerHTML = '<p>Prehistoric art includes the earliest known art forms, such as cave paintings and carvings.</p>';
+                    break;
+                case 'ancient':
+                    description.innerHTML = '<p>Ancient art includes the works of the Egyptians, Greeks, and Romans, known for their architecture and sculptures.</p>';
+                    break;
+                case 'medieval':
+                    description.innerHTML = '<p>Medieval art refers to the art produced during the Middle Ages, including religious works and illuminated manuscripts.</p>';
+                    break;
+                case 'renaissance':
+                    description.innerHTML = '<p>The Renaissance period saw a revival of classical learning and art, with artists like Leonardo da Vinci and Michelangelo.</p>';
+                    break;
+                case 'modern':
+                    description.innerHTML = '<p>Modern art encompasses movements from the late 19th century to today, including Impressionism, Abstract Expressionism, and more.</p>';
+                    break;
+                default:
+                    description.innerHTML = '<p>Select a period to see its details.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
